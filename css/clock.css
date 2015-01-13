@@ -1,0 +1,16 @@
+html {
+	background-color:green;
+}
+
+p {
+	color:white;
+	text-align:center;
+}
+
+h1 {
+	text-align:center;
+}
+
+#clock {
+	font-size:60px;
+}
