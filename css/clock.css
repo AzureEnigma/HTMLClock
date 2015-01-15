@@ -3,7 +3,6 @@ html {
 }
 
 p {
-	color:white;
 	text-align:center;
 }
 
@@ -11,6 +10,12 @@ h1 {
 	text-align:center;
 }
 
+.myName {
+	color:purple;
+	font-size:20px;
+}
+
 #clock {
+	color:white;
 	font-size:60px;
 }
