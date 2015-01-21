@@ -1,18 +1,43 @@
 html {
-	background-color:green;
+	text-align:center;
+	color:black;
 }
 
+body {
+	background-color:green;
+}	
+
 p {
-	text-align:center;
+	font-size:16px;
 }
 
 h1 {
-	text-align:center;
+	
 }
 
 .myName {
 	color:purple;
 	font-size:20px;
+}
+
+.cold {
+	background-color:#95A5A6;
+}
+
+.chilly {
+	background-color:#1ABC9C;
+}
+
+.nice {
+	background-color:#2980B9;
+}
+
+.warm {
+	background-color:#E67E22;
+}
+
+.hot {
+	background-color:#E74C3C;
 }
 
 #clock {
