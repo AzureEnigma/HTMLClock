@@ -8,7 +8,7 @@ function getAllAlarms()
         success: function(results) {
             for (var i = 0; i < results.length; i++) { 
 				console.log(i);
-                insertAlarm(results[i].attributes.time, results[i].attributes.alarmName);
+                insertAlarm(results[i].attributes.time, results[i].attributes.alarmName, results[i].id);
             }
 			checkAlarms(0);
         }
@@ -63,7 +63,7 @@ function checkAlarms(inserting)
 	}
 }
 
-function insertAlarm(time, alarmName)
+function insertAlarm(time, alarmName, id)
 {
 	var div = $("<div id='alarm'></div>");
 	div.addClass("flexable");
@@ -75,7 +75,7 @@ function insertAlarm(time, alarmName)
 	div2.addClass("time");
 	div2.html(time);
 	div.append(div2);
-	var button = $('<input type="button" class="deleteButton" value="Delete" onclick="removeAlarm(this)"></input>')
+	var button = $('<input type="button" id="' + id + '" class="deleteButton" value="Delete" onclick="removeAlarm(this)"></input>')
 	div.append(button);
 	$("#alarms").append(div);
 }
@@ -93,8 +93,8 @@ function addAlarm()
       alarmObject.save({"time": time,"alarmName": alarmName}, {
       success: function(object) {
 		checkAlarms(1);
-		console.log(object);
-        insertAlarm(time, alarmName);
+		var id = object.id;
+        insertAlarm(time, alarmName, id);
 		hideAlarmPopup();
       }
     });
@@ -106,9 +106,11 @@ function removeAlarm(button)
 	var div = $(button).closest('.flexable');
 	var alarmName = div.find('.name').text();
 	var alarmTime = div.find('.time').text();
+	var id = button.id;
+	console.log(id);
 	var AlarmObject = Parse.Object.extend("Alarm");
 	var query = new Parse.Query(AlarmObject);
-	query.equalTo("alarmName", alarmName);
+	query.equalTo("objectId", id);
 	query.find({
 	success: function(results) {
 		// The object was retrieved successfully.
