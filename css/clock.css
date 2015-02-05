@@ -5,10 +5,11 @@ html {
 
 body {
 	background-color:green;
+	font-size:16px;
 }	
 
 p {
-	font-size:16px;
+	color:blue;
 }
 
 h1 {
@@ -43,4 +44,8 @@ h1 {
 #clock {
 	color:white;
 	font-size:60px;
+}
+
+#cityname {
+	padding-top:10px;
 }
