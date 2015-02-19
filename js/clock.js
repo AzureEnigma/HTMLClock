@@ -18,6 +18,8 @@ function signinCallback(authResult) {
         console.log(profile);
 		userName = response['displayName'];
 		userId = response['id'];
+		$('#userNameText').html('Welcome ' + userName + '!');
+		$('#AddAlarmButtom').removeClass();
 		getAllAlarms(response['id']);
       }
     };
