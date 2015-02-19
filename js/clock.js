@@ -2,7 +2,7 @@ var userName = "";
 var userId;
 
 function signOutUser() {
-	document.getElementById('signinButton').setAttribute('style', 'display: inline');
+	document.getElementById('signinButton').setAttribute('style', 'display: block');
 	$('#userNameText').html('');
 	$('#AddAlarmButton').addClass('hide');
 	$('#SignOutButton').addClass('hide');
