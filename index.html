@@ -3,6 +3,7 @@
  <head>
 <link rel="stylesheet" type="text/css" href="css/clock.css">
 <link rel="stylesheet" type="text/css" href="css/alarm.css">
+<script src="https://apis.google.com/js/client:platform.js" async defer></script>
 <title>
 Clock
 </title>
@@ -21,6 +22,18 @@ Clock
  </div>
  <div id="alarms"></div>
  </div>
+ <div id = "googleButton">
+ <span id="signinButton">
+  <span
+    class="g-signin"
+    data-callback="signinCallback"
+    data-clientid="822100278260-hnqkqrve6ccgfd99doa4ng6nrb284vu1.apps.googleusercontent.com"
+    data-cookiepolicy="single_host_origin"
+    data-requestvisibleactions="http://schema.org/AddAction"
+    data-scope="https://www.googleapis.com/auth/plus.login">
+  </span>
+</span>
+</div>
  <div id="mask" class="hide"></div>
  <div id="popup" class="hide">
     <h2>Add Alarm</h2>
