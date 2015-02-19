@@ -17,11 +17,6 @@ function signinCallback(authResult) {
   }
 }
 
-
-function mySignInCallback(userId) {
-
-}
-
 function getAllAlarms()
 {
 	console.log("start");
