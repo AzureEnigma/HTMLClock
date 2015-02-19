@@ -17,6 +17,7 @@ function signinCallback(authResult) {
         alert('id is ' + profile.id);
       }
     };
+	
     gapi.client.request(args);
   } else {
     // Update the app to reflect a signed out user
