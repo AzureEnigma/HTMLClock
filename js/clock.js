@@ -1,4 +1,5 @@
 var userName = "";
+var userId;
 
 function signinCallback(authResult) {
   console.log("clicked");
@@ -15,6 +16,9 @@ function signinCallback(authResult) {
       'callback': function(response) {
         var profile = response;
         console.log(profile);
+		userName = response['displayName'];
+		userId = response['id'];
+		getAllAlarms(response['id']);
       }
     };
 	gapi.client.request(args);
@@ -28,12 +32,13 @@ function signinCallback(authResult) {
   }
 }
 
-function getAllAlarms()
+function getAllAlarms(userid)
 {
 	console.log("start");
 	Parse.initialize("J45ercO0uGT1gHwEUizxbrnxp6OGu6lzuoQYs5Ly", "gu7g4d8XbIP02Hm7CPxaAKNOZCrjPNLJ1QFIagj2");
 	var AlarmObject = Parse.Object.extend("Alarm");
     var query = new Parse.Query(AlarmObject);
+	query.equalTo("userId", userid);
     query.find({
         success: function(results) {
             for (var i = 0; i < results.length; i++) { 
@@ -120,7 +125,7 @@ function addAlarm()
 	time = hours + ":" + mins + " " + ampm;
 	var AlarmObject = Parse.Object.extend("Alarm");
     var alarmObject = new AlarmObject();
-      alarmObject.save({"time": time,"alarmName": alarmName}, {
+      alarmObject.save({"time": time,"alarmName": alarmName, "userId":userId}, {
       success: function(object) {
 		checkAlarms(1);
 		var id = object.id;
@@ -284,7 +289,7 @@ function getTemp(coords) {
 
 function onStart() {
 	console.log("yolo");
-	getAllAlarms();
+	//getAllAlarms();
 	getTime();
 	getLocation();
 }
