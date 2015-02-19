@@ -17,6 +17,7 @@ function signinCallback(authResult) {
         console.log(profile);
       }
     };
+	gapi.client.request(args);
   } else {
     // Update the app to reflect a signed out user
     // Possible error values:
