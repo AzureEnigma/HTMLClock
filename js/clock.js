@@ -19,7 +19,7 @@ function signinCallback(authResult) {
 		userName = response['displayName'];
 		userId = response['id'];
 		$('#userNameText').html('Welcome ' + userName + '!');
-		$('#AddAlarmButtom').removeClass();
+		$('#AddAlarmButton').removeClass();
 		getAllAlarms(response['id']);
       }
     };
