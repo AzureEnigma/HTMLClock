@@ -6,19 +6,7 @@ function signinCallback(authResult) {
     // Update the app to reflect a signed in user
     // Hide the sign-in button now that the user is authorized, for example:
     document.getElementById('signinButton').setAttribute('style', 'display: none');
-	gapi.auth.setToken(authResult);
-
-    var args = {
-      'path': '/plus/v1moments/people/me',
-      'method': 'GET',
-      'callback': function(response) {
-        var profile = response;
-        console.log(profile);
-        alert('id is ' + profile.id);
-      }
-    };
-	
-    gapi.client.request(args);
+	console.log(authResult);
   } else {
     // Update the app to reflect a signed out user
     // Possible error values:
