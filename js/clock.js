@@ -1,6 +1,15 @@
 var userName = "";
 var userId;
 
+function signOutUser() {
+	document.getElementById('signinButton').setAttribute('style', 'display: inline');
+	$('#userNameText').html('');
+	$('#AddAlarmButton').addClass('hide');
+	$('#SignOutButton').addClass('hide');
+	$('#alarms').empty();
+	gapi.auth.signOut();
+}
+
 function signinCallback(authResult) {
   console.log("clicked");
   if (authResult['status']['signed_in']) {
@@ -20,6 +29,7 @@ function signinCallback(authResult) {
 		userId = response['id'];
 		$('#userNameText').html('Welcome ' + userName + '!');
 		$('#AddAlarmButton').removeClass();
+		$('#SignOutButton').removeClass();
 		getAllAlarms(response['id']);
       }
     };
