@@ -10,7 +10,7 @@ function signinCallback(authResult) {
 	gapi.auth.setToken(authResult);
 	
 	var args = {
-      'path': '/plus/v1/people/' + authResult[userId],
+      'path': '/plus/v1/people/me',
       'method': 'GET',
       'callback': function(response) {
         var profile = response;
