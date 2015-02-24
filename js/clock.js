@@ -148,8 +148,7 @@ function addAlarm()
 			var id = object.id;
 			insertAlarm(time, alarmName, id);
 			hideAlarmPopup();
-			var _gaq = _gaq || [];
-			_gaq.push(['_trackEvent', 'Alarm', 'Add']);
+			_ga.push(['_trackEvent', 'Alarm', 'Add']);
 			console.log("sent google analytic push");
 		  }
 		});
@@ -175,9 +174,8 @@ function removeAlarm(button)
 			var object = results[i];
 			object.destroy({});
 		}
-		var _gaq = _gaq || [];
 		div.remove();
-		_gaq.push(['_trackEvent', 'Alarm', 'Delete']);
+		_ga.push(['_trackEvent', 'Alarm', 'Delete']);
 		checkAlarms(0);
 	},
 	error: function(object, error) {
