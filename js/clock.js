@@ -1,3 +1,4 @@
+//fuck you im using globals
 var userName = "";
 var userId;
 
@@ -30,6 +31,7 @@ function signinCallback(authResult) {
 		$('#userNameText').html('Welcome ' + userName + '!');
 		$('#AddAlarmButton').removeClass();
 		$('#SignOutButton').removeClass();
+		_gaq.push(['_trackEvent', 'Google', 'SignIn']);
 		getAllAlarms(response['id']);
       }
     };
@@ -142,6 +144,7 @@ function addAlarm()
 		checkAlarms(1);
 		var id = object.id;
         insertAlarm(time, alarmName, id);
+		_gaq.push(['_trackEvent', 'Alarm', 'Add']);
 		hideAlarmPopup();
       }
     });
@@ -167,6 +170,7 @@ function removeAlarm(button)
 			object.destroy({});
 		}
 		div.remove();
+		_gaq.push(['_trackEvent', 'Alarm', 'Delete']);
 		checkAlarms(0);
 	},
 	error: function(object, error) {
