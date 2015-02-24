@@ -5,8 +5,8 @@ var userId;
 function signOutUser() {
 	document.getElementById('signinButton').setAttribute('style', 'display: block');
 	$('#userNameText').html('');
-	$('#AddAlarmButton').addClass('hide');
 	$('#SignOutButton').addClass('hide');
+	userId = null;
 	$('#alarms').empty();
 	gapi.auth.signOut();
 }
@@ -29,8 +29,8 @@ function signinCallback(authResult) {
 		userName = response['displayName'];
 		userId = response['id'];
 		$('#userNameText').html('Welcome ' + userName + '!');
-		$('#AddAlarmButton').removeClass();
 		$('#SignOutButton').removeClass();
+		var _gaq = _gaq || [];
 		_gaq.push(['_trackEvent', 'Google', 'SignIn']);
 		getAllAlarms(response['id']);
       }
@@ -85,8 +85,10 @@ function checkAlarmTimes() {
 
 function showAlarmPopup()
 {
-	$("#mask").removeClass("hide");
-	$("#popup").removeClass("hide");
+	if(userId != null) {
+		$("#mask").removeClass("hide");
+		$("#popup").removeClass("hide");
+	}
 }
 
 function hideAlarmPopup()
@@ -131,23 +133,27 @@ function insertAlarm(time, alarmName, id)
 
 function addAlarm()
 {
-	Parse.initialize("J45ercO0uGT1gHwEUizxbrnxp6OGu6lzuoQYs5Ly", "gu7g4d8XbIP02Hm7CPxaAKNOZCrjPNLJ1QFIagj2");
-	hours = $("#hours option:selected").text();
-	mins = $("#mins option:selected").text();
-	ampm = $("#ampm option:selected").text();
-	alarmName = $("#alarmName").val();
-	time = hours + ":" + mins + " " + ampm;
-	var AlarmObject = Parse.Object.extend("Alarm");
-    var alarmObject = new AlarmObject();
-      alarmObject.save({"time": time,"alarmName": alarmName, "userId":userId}, {
-      success: function(object) {
-		checkAlarms(1);
-		var id = object.id;
-        insertAlarm(time, alarmName, id);
-		_gaq.push(['_trackEvent', 'Alarm', 'Add']);
-		hideAlarmPopup();
-      }
-    });
+	if(userId != null) {
+		Parse.initialize("J45ercO0uGT1gHwEUizxbrnxp6OGu6lzuoQYs5Ly", "gu7g4d8XbIP02Hm7CPxaAKNOZCrjPNLJ1QFIagj2");
+		hours = $("#hours option:selected").text();
+		mins = $("#mins option:selected").text();
+		ampm = $("#ampm option:selected").text();
+		alarmName = $("#alarmName").val();
+		time = hours + ":" + mins + " " + ampm;
+		var AlarmObject = Parse.Object.extend("Alarm");
+		var alarmObject = new AlarmObject();
+		  alarmObject.save({"time": time,"alarmName": alarmName, "userId":userId}, {
+		  success: function(object) {
+			checkAlarms(1);
+			var id = object.id;
+			insertAlarm(time, alarmName, id);
+			hideAlarmPopup();
+			var _gaq = _gaq || [];
+			_gaq.push(['_trackEvent', 'Alarm', 'Add']);
+			console.log("sent google analytic push");
+		  }
+		});
+	}
 }
 
 function removeAlarm(button)
@@ -169,6 +175,7 @@ function removeAlarm(button)
 			var object = results[i];
 			object.destroy({});
 		}
+		var _gaq = _gaq || [];
 		div.remove();
 		_gaq.push(['_trackEvent', 'Alarm', 'Delete']);
 		checkAlarms(0);
