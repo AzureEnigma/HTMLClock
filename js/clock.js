@@ -30,7 +30,6 @@ function signinCallback(authResult) {
 		userId = response['id'];
 		$('#userNameText').html('Welcome ' + userName + '!');
 		$('#SignOutButton').removeClass();
-		var _gaq = _gaq || [];
 		_gaq.push(['_trackEvent', 'Google', 'SignIn']);
 		getAllAlarms(response['id']);
       }
@@ -148,7 +147,7 @@ function addAlarm()
 			var id = object.id;
 			insertAlarm(time, alarmName, id);
 			hideAlarmPopup();
-			_ga.push(['_trackEvent', 'Alarm', 'Add']);
+			_gaq.push(['_trackEvent', 'Alarm', 'Add']);
 			console.log("sent google analytic push");
 		  }
 		});
@@ -175,7 +174,7 @@ function removeAlarm(button)
 			object.destroy({});
 		}
 		div.remove();
-		_ga.push(['_trackEvent', 'Alarm', 'Delete']);
+		_gaq.push(['_trackEvent', 'Alarm', 'Delete']);
 		checkAlarms(0);
 	},
 	error: function(object, error) {
