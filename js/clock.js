@@ -84,10 +84,8 @@ function checkAlarmTimes() {
 
 function showAlarmPopup()
 {
-	if(userId != null) {
-		$("#mask").removeClass("hide");
-		$("#popup").removeClass("hide");
-	}
+	$("#mask").removeClass("hide");
+	$("#popup").removeClass("hide");
 }
 
 function hideAlarmPopup()
